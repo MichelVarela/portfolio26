@@ -1,0 +1,12 @@
+<div class="preview-wrapper">
+    <div class="video-block">
+        {% if self.video %}
+        {{ self.video }}
+        {% else %}
+        <div class="placeholder-video"
+            style="background: #000; color: #fff; height: 200px; display: flex; align-items: center; justify-content: center;">
+            Video Placeholder
+        </div>
+        {% endif %}
+    </div>
+</div>

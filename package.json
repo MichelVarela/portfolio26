@@ -1,0 +1,17 @@
+{
+  "name": "portfolio26",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx @tailwindcss/cli -i ./mysite/static/css/mysite.css -o ./mysite/static/css/output.css --watch",
+    "build": "npx @tailwindcss/cli -i ./mysite/static/css/mysite.css -o ./mysite/static/css/output.css --minify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.17",
+    "tailwindcss": "^4.1.17"
+  }
+}

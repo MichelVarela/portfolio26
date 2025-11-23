@@ -1,0 +1,7 @@
+{% load wagtailcore_tags %}
+<section
+    class="container-block wrapper grid {{ self.layout }} {{ self.gap_x }} {{ self.gap_y }} {{ self.padding_top }} {{ self.padding_bottom }}">
+    {% for block in self.columns %}
+    {% include_block block %}
+    {% endfor %}
+</section>

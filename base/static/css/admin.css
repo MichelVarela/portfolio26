@@ -1,0 +1,27 @@
+.struct-block {
+    /* heading-block */
+    @media (width >= 40rem) {
+        &.heading-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            div[data-contentpath$="heading_text"] {
+                grid-column: 1 / -1;
+            }
+        }
+
+        /* container-block */
+        &.container-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+
+            div[data-contentpath$="layout"] {
+                grid-column: 1 / -1;
+            }
+
+            div[data-contentpath$="columns"] {
+                grid-column: 1 / -1;
+            }
+        }
+    }
+}

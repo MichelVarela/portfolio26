@@ -1,0 +1,11 @@
+{% load wagtailcore_tags %}
+<div class="preview-wrapper">
+    <div class="container-block layout-{{ self.layout }} gap-{{ self.gap }} pt-{{ self.padding_top }} pb-{{ self.padding_bottom }}"
+        style="border: 1px solid #ccc; padding: 10px;">
+        <div style="background: #ddd; padding: 5px; margin-bottom: 10px; font-size: 0.8em;">Container: {{ self.layout }}
+        </div>
+        {% for block in self.columns %}
+        {% include_block block %}
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,10 @@
+{% load wagtailcore_tags %}
+<div class="preview-wrapper">
+    <div class="column-block layout-{{ self.layout }}" style="border: 1px dashed #ccc; padding: 10px;">
+        <div style="background: #eee; padding: 5px; margin-bottom: 5px; font-size: 0.8em;">Column: {{ self.layout }}
+        </div>
+        {% for block in self.content %}
+        {% include_block block %}
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,6 @@
+{% load wagtailcore_tags %}
+{% if self.page_link %}
+<a href="{% pageurl self.page_link %}" class="btn">{{ self.text }}</a>
+{% elif self.url_link %}
+<a href="{{ self.url_link }}" class="btn">{{ self.text }}</a>
+{% endif %}

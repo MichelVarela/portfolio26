@@ -1,0 +1,20 @@
+{% load wagtailimages_tags %}
+<div class="preview-wrapper">
+    <div class="image-block">
+        {% if self.image %}
+        {% image self.image original as img %}
+        <img src="{{ img.url }}" alt="{{ img.alt }}" class="img-fluid">
+        {% else %}
+        <div class="placeholder-image"
+            style="background: #eee; height: 200px; display: flex; align-items: center; justify-content: center;">
+            Image Placeholder
+        </div>
+        {% endif %}
+        {% if self.caption %}
+        <p class="caption">{{ self.caption }}</p>
+        {% endif %}
+        {% if self.attribution %}
+        <p class="attribution">{{ self.attribution }}</p>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,6 @@
+{% load wagtailcore_tags %}
+<div class="button-area-block direction-{{ self.direction }} {{ self.gap }}">
+    {% for block in self.buttons %}
+    {% include_block block %}
+    {% endfor %}
+</div>

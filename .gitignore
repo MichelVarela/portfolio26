@@ -1,0 +1,40 @@
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+
+# Wagtail
+wagtail_local_settings.py
+
+# Python
+venv/
+.env
+.venv
+env/
+build/
+dist/
+*.egg-info/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Tailwind
+mysite/static/css/output.css
+
+# Collected Static
+/static/
