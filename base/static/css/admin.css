@@ -23,5 +23,33 @@
                 grid-column: 1 / -1;
             }
         }
+
+        /* heading-with-two-lines-block */
+        &.heading-with-two-lines-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            div[data-contentpath$="line_one"] {
+                grid-column: 1 / -1;
+            }
+
+            div[data-contentpath$="line_two"] {
+                grid-column: 1 / -1;
+            }
+        }
+
+        /* box-block */
+        &.box-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            div[data-contentpath$="gap"] {
+                grid-column: 1 / -1;
+            }
+
+            div[data-contentpath$="content"] {
+                grid-column: 1 / -1;
+            }
+        }
     }
 }

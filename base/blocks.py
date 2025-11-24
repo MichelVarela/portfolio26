@@ -40,6 +40,81 @@ class ProfileCardBlock(StructBlock):
         preview_value = {"image": "https://via.placeholder.com/150", "name": "John Doe"}
         preview_template = "blocks/previews/profile_card.html"
 
+
+class InformativeNumber(StructBlock):
+    number = CharBlock(required=True)
+    title = CharBlock(required=True)
+    
+    class Meta:
+        template = "blocks/informative_number.html"
+        icon = "superscript"
+        label = "Informative Number"
+        preview_value = {"number": "10", "title": "Years of Experience"}
+        preview_template = "blocks/previews/informative_number.html"
+
+
+class CardSkillBlock(StructBlock):
+    title = CharBlock(required=True)
+    page_link = PageChooserBlock(required=False)
+    url_link = URLBlock(required=False)
+    background = ChoiceBlock(
+        choices=[
+            ("bg-portfolio-orange", "Orange"),
+            ("bg-portfolio-green", "Green"),
+        ],
+        default="bg-portfolio-orange",
+        required=True,
+    )
+    icon = ChoiceBlock(
+        choices=[
+            ("dynamic", "Dynamic"),
+            ("square", "Square"),
+        ],
+        default="dynamic",
+        required=True,
+    )
+    
+    class Meta:
+        template = "blocks/card_skill.html"
+        icon = "user"
+        label = "Card Skill"
+        preview_value = {"title": "John Doe", "background": "orange", "icon": "dynamic", "page_link": "https://www.google.com", "url_link": "https://www.google.com"}
+        preview_template = "blocks/previews/card_skill.html"
+
+
+class HeadingWithTwoLinesBlock(StructBlock):
+    line_one = CharBlock(required=True)
+    line_two = CharBlock(required=True)
+    size = ChoiceBlock(
+        choices=[
+            ("h2", "H2"),
+            ("h3", "H3"),
+            ("h4", "H4"),
+            ("h5", "H5"),
+            ("h6", "H6"),
+        ],
+        default="h2",
+        required=True,
+    )
+    text_align = ChoiceBlock(
+        choices=[
+            ("text-left", "left"),
+            ("text-center", "center"),
+            ("text-right", "right"),
+        ],
+        default="text-left",
+        required=True,
+    )
+    
+    class Meta:
+        template = 'blocks/heading_with_two_lines.html'
+        icon = "title"
+        label = "Heading with Two Lines"
+        preview_value = {"line_one": "Healthy bread types", "line_two": "Healthy bread types", "size": "h2", "text_align": "left"}
+        preview_template = "blocks/previews/heading_with_two_lines.html"
+        form_classname = 'heading-with-two-lines-block struct-block'
+
+
 class HeadingBlock(StructBlock):
     heading_text = CharBlock(required=True)
     size = ChoiceBlock(
@@ -167,13 +242,71 @@ class ButtonAreaBlock(StructBlock):
         preview_template = "blocks/previews/button_area.html"
 
 
+class BoxBlock(StructBlock):
+    direction = ChoiceBlock(
+        choices=[
+            ("flex-col", "Vertical"),
+            ("flex-row", "Horizontal"),
+        ],
+        default="flex-row",
+        required=True,
+    )
+    vertical_alignment = ChoiceBlock(
+        choices=[
+            ("items-start", "Start"),
+            ("items-center", "Center"),
+            ("items-end", "End"),
+        ],
+        default="items-start",
+        required=True,
+    )
+    horizontal_alignment = ChoiceBlock(
+        choices=[
+            ("justify-start", "Start"),
+            ("justify-center", "Center"),
+            ("justify-end", "End"),
+            ("justify-between", "Between"),
+            ("justify-around", "Around"),
+            ("justify-evenly", "Evenly"),
+        ],
+        default="justify-start",
+        required=True,
+    )
+    gap = ChoiceBlock(
+        choices=GAP_CHOICES,
+        default="gap-0",
+        required=True,
+    )
+    content = StreamBlock(
+        [
+            ("informative_number", InformativeNumber()),
+            ("card_skill", CardSkillBlock()),
+        ]
+    )
+
+    class Meta:
+        template = "blocks/box.html"
+        icon = "placeholder"
+        label = "Box"
+        preview_value = {
+            "vertical_alignment": "flex-row",
+            "horizontal_alignment": "justify-start",
+            "gap": "gap-0",
+            "content": [
+                {"type": "informative_number", "value": {"number": "10", "title": "Years of Experience"}},
+            ]
+        }
+        preview_template = "blocks/previews/box.html"
+        form_classname = 'box-block struct-block'
+
+
 class ColumnBlock(StructBlock):
     layout = ChoiceBlock(
         choices=[
             ("col-span-full", "Full"),
             ("col-auto", "Auto"),
         ],
-        default="col-span-full",
+        default="col-auto",
         required=True,
     )
     content = StreamBlock(
@@ -185,16 +318,19 @@ class ColumnBlock(StructBlock):
             ("spacer", SpacerBlock()),
             ("button_area", ButtonAreaBlock()),
             ("profile_card", ProfileCardBlock()),
+            ("heading_with_two_lines", HeadingWithTwoLinesBlock()),
+            ("informative_number", InformativeNumber()),
+            ("box", BoxBlock()),
         ],
         required=True,
     )
 
     class Meta:
         template = "blocks/column.html"
-        icon = "placeholder"
+        icon = "grip"
         label = "Column"
         preview_value = {
-            "layout": "col-span-full",
+            "layout": "col-auto",
             "content": [
                 {"type": "paragraph", "value": {"content": "<p>Column content goes here.</p>"}},
             ]
@@ -242,7 +378,7 @@ class ContainerBlock(StructBlock):
 
     class Meta:
         template = "blocks/container.html"
-        icon = "placeholder"
+        icon = "folder"
         label = "Container"
         preview_value = {
             "layout": "grid-cols-2",

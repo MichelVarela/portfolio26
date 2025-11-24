@@ -1,0 +1,7 @@
+{% load wagtailcore_tags %}
+
+<div class="box-block flex flex-wrap {{ self.direction }} {{ self.vertical_alignment }} {{ self.horizontal_alignment }} {{ self.gap }}">
+    {% for block in self.content %}
+    {% include_block block %}
+    {% endfor %}
+</div>

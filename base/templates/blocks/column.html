@@ -1,5 +1,5 @@
 {% load wagtailcore_tags %}
-<div class="column-block layout-{{ self.layout }}">
+<div class="column-block {{ self.layout }}">
     {% for block in self.content %}
     {% include_block block %}
     {% endfor %}
