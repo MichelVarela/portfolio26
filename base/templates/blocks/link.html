@@ -1,0 +1,27 @@
+{% if self.link_type == 'internal' %}
+    <a href="{{ self.page_link }}" title="{{ self.title }}" class="text-white">
+        {% if icon_template %}
+            {% include icon_template with icon=icon %}
+        {% else %}
+            {{ self.title }}
+        {% endif %}
+    </a>
+{% endif %}
+{% if self.link_type == 'external' %}
+    <a href="{{ self.url }}" title="{{ self.title }}" target="_blank" rel="noopener noreferrer" class="text-white">
+        {% if icon_template %}
+            {% include icon_template with icon=icon %}
+        {% else %}
+            {{ self.title }}
+        {% endif %}
+    </a>
+{% endif %}
+{% if self.link_type == 'mailto' %}
+    <a href="mailto:{{ self.mailto }}" title="{{ self.title }}" target="_blank" rel="noopener noreferrer" class="text-white">
+        {% if icon_template %}
+            {% include icon_template with icon=icon %}
+        {% else %}
+            {{ self.title }}
+        {% endif %}
+    </a>
+{% endif %}

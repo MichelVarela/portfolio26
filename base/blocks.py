@@ -10,8 +10,34 @@ from wagtail.blocks import (
 )
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
+from django.core.validators import EmailValidator
 
 from base.choices import SIZE_CHOICES, GAP_CHOICES, GAP_X_CHOICES, GAP_Y_CHOICES, PADDING_TOP_CHOICES, PADDING_BOTTOM_CHOICES
+
+class LinkBlock(StructBlock):
+    link_type = ChoiceBlock(
+        choices=[
+            ("internal", "Internal"),
+            ("external", "External"),
+            ("mailto", "Mailto"),
+        ],
+        default="internal",
+        required=True,
+    )
+    page_link = PageChooserBlock(required=False)
+    url = URLBlock(required=False)
+    mailto = CharBlock(validators=[EmailValidator()], required=False)
+    title = CharBlock(required=True)
+    
+    class Meta:
+        template = "blocks/link.html"
+        icon = "link"
+        label = "Link"
+        preview_value = {"link_type": "internal", "page_link": "https://www.google.com", "url": "https://www.google.com", "mailto": "https://www.google.com", "title": "John Doe"}
+        preview_template = "blocks/previews/link.html"
+        form_classname = 'link-block struct-block'
+        form_attrs = {'data-controller': 'conditional-link'}
+
 
 class ProfileCardBlock(StructBlock):
     image = ImageChooserBlock(required=True)
@@ -28,8 +54,7 @@ class ProfileCardBlock(StructBlock):
                 default="email",
                 required=True,
             )),
-            ("url", URLBlock(required=True)),
-            ("title", CharBlock(required=True)),
+            ("link", LinkBlock(required=True)),
         ]
     ))
     
@@ -299,6 +324,7 @@ class BoxBlock(StructBlock):
         preview_template = "blocks/previews/box.html"
         form_classname = 'box-block struct-block'
 
+
 class BoxGridBlock(StructBlock):
     layout = ChoiceBlock(
         choices=[
@@ -338,6 +364,7 @@ class BoxGridBlock(StructBlock):
         preview_template = "blocks/previews/box_grid.html"
         form_classname = 'box-grid-block struct-block'
 
+
 class ColumnBlock(StructBlock):
     layout = ChoiceBlock(
         choices=[
@@ -360,6 +387,7 @@ class ColumnBlock(StructBlock):
             ("informative_number", InformativeNumber()),
             ("box", BoxBlock()),
             ("box_grid", BoxGridBlock()),
+            ("link", LinkBlock()),
         ],
         required=True,
     )
