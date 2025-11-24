@@ -27,13 +27,13 @@ class LinkBlock(StructBlock):
     page_link = PageChooserBlock(required=False)
     url = URLBlock(required=False)
     mailto = CharBlock(validators=[EmailValidator()], required=False)
-    title = CharBlock(required=True)
+    link_text = CharBlock(required=True)
     
     class Meta:
         template = "blocks/link.html"
         icon = "link"
         label = "Link"
-        preview_value = {"link_type": "internal", "page_link": "https://www.google.com", "url": "https://www.google.com", "mailto": "https://www.google.com", "title": "John Doe"}
+        preview_value = {"link_type": "internal", "page_link": "https://www.google.com", "url": "https://www.google.com", "mailto": "https://www.google.com", "link_text": "John Doe"}
         preview_template = "blocks/previews/link.html"
         form_classname = 'link-block struct-block'
         form_attrs = {'data-controller': 'conditional-link'}
@@ -80,8 +80,7 @@ class InformativeNumber(StructBlock):
 
 class CardSkillBlock(StructBlock):
     title = CharBlock(required=True)
-    page_link = PageChooserBlock(required=False)
-    url_link = URLBlock(required=False)
+    link = LinkBlock(required=True)
     background = ChoiceBlock(
         choices=[
             ("bg-portfolio-orange", "Orange"),
@@ -224,15 +223,13 @@ class SpacerBlock(StructBlock):
 
 
 class ButtonBlock(StructBlock):
-    text = CharBlock(required=True)
-    page_link = PageChooserBlock(required=False)
-    url_link = URLBlock(required=False)
+    link = LinkBlock(required=False)
 
     class Meta:
         template = "blocks/button.html"
         icon = "placeholder"
         label = "Button"
-        preview_value = {"text": "Click Me", "url_link": "https://example.com"}
+        preview_value = {"link": {"link_type": "external", "url": "https://example.com"}}
         preview_template = "blocks/previews/button.html"
 
 
@@ -387,7 +384,6 @@ class ColumnBlock(StructBlock):
             ("informative_number", InformativeNumber()),
             ("box", BoxBlock()),
             ("box_grid", BoxGridBlock()),
-            ("link", LinkBlock()),
         ],
         required=True,
     )
