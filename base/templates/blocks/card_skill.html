@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="relative card-skill-block *:[a]:relative *:[a]:flex *:[a]:flex-col *:[a]:gap-6 *:[a]:pt-10 *:[a]:px-5 *:[a]:pb-5.5 *:[a]:z-10 rounded-[10px] {{ self.background }} {% if self.background == 'bg-portfolio-orange' %}text-white{% endif %} {% if self.background == 'bg-portfolio-green' %}text-black{% endif %} overflow-hidden">
+<div class="relative card-skill-block *:[a]:relative *:[a]:flex *:[a]:flex-col *:[a]:gap-6 *:[a]:h-full *:[a]:pt-10 *:[a]:px-5 *:[a]:pb-5.5 *:[a]:z-10 rounded-[10px] {{ self.background }} {% if self.background == 'bg-portfolio-orange' %}text-white{% endif %} {% if self.background == 'bg-portfolio-green' %}text-black{% endif %} overflow-hidden w-full">
     {% if self.page_link and not self.url_link %}
     <a href="{{ self.page_link }}" title="{{ self.title }}">
     {% endif %}
@@ -17,10 +17,12 @@
         {% endif %}
     </div>
 
-    <h3 class="font-poppins font-medium text-[1.5rem]/[1.1] uppercase">{{ self.title }}</h3>
+    <div class="flex-1 flex flex-col gap-6 justify-between">
+        <h3 class="font-poppins font-medium text-[1.5rem]/[1.1] uppercase">{{ self.title }}</h3>
 
-    <div class="flex justify-center self-end items-center size-8 *:[svg]:w-4 border rounded-[6px]">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m600-200-57-56 184-184H80v-80h647L544-704l56-56 280 280-280 280Z"/></svg>
+        <div class="flex justify-center self-end items-center size-8 *:[svg]:w-4 border rounded-[6px]">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m600-200-57-56 184-184H80v-80h647L544-704l56-56 280 280-280 280Z"/></svg>
+        </div>
     </div>
 
     {% if self.page_link or self.url_link %}

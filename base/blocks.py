@@ -299,6 +299,44 @@ class BoxBlock(StructBlock):
         preview_template = "blocks/previews/box.html"
         form_classname = 'box-block struct-block'
 
+class BoxGridBlock(StructBlock):
+    layout = ChoiceBlock(
+        choices=[
+            ("grid-cols-1", "Full"),
+            ("lg:grid-cols-2", "2 Columns"),
+            ("md:grid-cols-3", "3 Columns"),
+            ("md:grid-cols-4", "4 Columns"),
+            ("lg:grid-cols-[1fr_2fr]", "4/8 Columns"),
+            ("lg:grid-cols-[2fr_1fr]", "8/4 Columns"),
+        ],
+        default="grid-cols-1",
+        required=True,
+    )
+    gap = ChoiceBlock(
+        choices=GAP_CHOICES,
+        default="gap-0",
+        required=True,
+    )
+    content = StreamBlock(
+        [
+            ("informative_number", InformativeNumber()),
+            ("card_skill", CardSkillBlock()),
+        ]
+    )
+
+    class Meta:
+        template = "blocks/box_grid.html"
+        icon = "placeholder"
+        label = "Box Grid"
+        preview_value = {
+            "layout": "grid-cols-1",
+            "gap": "gap-0",
+            "content": [
+                {"type": "informative_number", "value": {"number": "10", "title": "Years of Experience"}},
+            ]
+        }
+        preview_template = "blocks/previews/box_grid.html"
+        form_classname = 'box-grid-block struct-block'
 
 class ColumnBlock(StructBlock):
     layout = ChoiceBlock(
@@ -321,6 +359,7 @@ class ColumnBlock(StructBlock):
             ("heading_with_two_lines", HeadingWithTwoLinesBlock()),
             ("informative_number", InformativeNumber()),
             ("box", BoxBlock()),
+            ("box_grid", BoxGridBlock()),
         ],
         required=True,
     )
@@ -345,9 +384,9 @@ class ContainerBlock(StructBlock):
             ("md:grid-cols-[repeat(1,_34.625rem)] lg:grid-cols-[repeat(1,_28.5rem)] xl:grid-cols-[repeat(1,_36rem)] 3xl:grid-cols-[repeat(1,_47.25rem)]", "Small"),
             ("lg:grid-cols-[repeat(1,_39rem)] xl:grid-cols-[repeat(1,_49rem)] 3xl:grid-cols-[repeat(1,_64rem)]", "Medium"),
             ("lg:grid-cols-[repeat(1,_49.5rem)] xl:grid-cols-[repeat(1,_62rem)] 3xl:grid-cols-[repeat(1,_80.75rem)]", "Large"),
-            ("grid-cols-2", "2 Columns"),
-            ("grid-cols-3", "3 Columns"),
-            ("grid-cols-4", "4 Columns"),
+            ("lg:grid-cols-2", "2 Columns"),
+            ("md:grid-cols-3", "3 Columns"),
+            ("md:grid-cols-4", "4 Columns"),
             ("lg:grid-cols-[1fr_2fr]", "4/8 Columns"),
             ("lg:grid-cols-[2fr_1fr]", "8/4 Columns"),
         ],
@@ -381,7 +420,7 @@ class ContainerBlock(StructBlock):
         icon = "folder"
         label = "Container"
         preview_value = {
-            "layout": "grid-cols-2",
+            "layout": "lg:grid-cols-2",
             "gap_x": "gap-x-0",
             "gap_y": "gap-y-0",
             "padding_top": "none",

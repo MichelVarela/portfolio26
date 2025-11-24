@@ -41,10 +41,24 @@
         /* box-block */
         &.box-block {
             display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+
+            div[data-contentpath$="direction"] {
+                grid-column: 1 / -1;
+            }
+
+            div[data-contentpath$="content"] {
+                grid-column: 1 / -1;
+            }
+        }
+
+        /* box-grid */
+        &.box-grid-block {
+            display: grid;
             grid-template-columns: 1fr 1fr;
 
-            div[data-contentpath$="gap"] {
-                grid-column: 1 / -1;
+            div[data-contentpath$="layout"] {
+                grid-column: auto;
             }
 
             div[data-contentpath$="content"] {
