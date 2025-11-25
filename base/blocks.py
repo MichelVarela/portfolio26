@@ -7,10 +7,13 @@ from wagtail.blocks import (
     PageChooserBlock,
     URLBlock,
     StreamBlock,
+    DateBlock,
+    BooleanBlock,
 )
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 from django.core.validators import EmailValidator
+from wagtail.fields import NoFutureDateValidator
 
 from base.choices import SIZE_CHOICES, GAP_CHOICES, GAP_X_CHOICES, GAP_Y_CHOICES, PADDING_TOP_CHOICES, PADDING_BOTTOM_CHOICES
 
@@ -74,10 +77,26 @@ class ProjectCardBlock(StructBlock):
     
     class Meta:
         template = "blocks/project_card.html"
-        icon = "user"
+        icon = "folder-inverse"
         label = "Project Card"
         preview_value = {"image": "https://via.placeholder.com/150", "heading": "John Doe"}
         preview_template = "blocks/previews/project_card.html"
+
+
+class ExperienceCardBlock(StructBlock):
+    heading = CharBlock(required=True)
+    paragraph = RichTextBlock(required=True)
+    link = LinkBlock(required=True)
+    from_date = DateBlock(required=True, validators=[NoFutureDateValidator()])
+    to_date = DateBlock(required=True, validators=[NoFutureDateValidator()])
+    current = BooleanBlock(required=False)
+    
+    class Meta:
+        template = "blocks/experience_card.html"
+        icon = "folder-open-1"
+        label = "Experience Card"
+        preview_value = {"heading": "John Doe", "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec metus vel ante convallis finibus. Nullam nec metus vel ante convallis finibus. Nullam nec metus vel ante convallis finibus.", "link": {"link_type": "internal", "page_link": "https://www.google.com", "url": "https://www.google.com", "mailto": "https://www.google.com", "link_text": "John Doe"}, "from_date": "2022-01-01", "to_date": "2022-01-01", "current": True}
+        preview_template = "blocks/previews/experience_card.html"
 
 
 class InformativeNumber(StructBlock):
@@ -230,7 +249,7 @@ class SpacerBlock(StructBlock):
 
     class Meta:
         template = "blocks/spacer.html"
-        icon = "arrows-up-down"
+        icon = "collapse-up"
         label = "Spacer"
         preview_value = {"height": "h-6"}
         preview_template = "blocks/previews/spacer.html"
@@ -265,7 +284,7 @@ class ButtonAreaBlock(StructBlock):
 
     class Meta:
         template = "blocks/button_area.html"
-        icon = "placeholder"
+        icon = "grip"
         label = "Button Area"
         preview_value = {
             "direction": "horizontal",
@@ -322,7 +341,7 @@ class BoxBlock(StructBlock):
 
     class Meta:
         template = "blocks/box.html"
-        icon = "placeholder"
+        icon = "radio-empty"
         label = "Box"
         preview_value = {
             "vertical_alignment": "flex-row",
@@ -363,7 +382,7 @@ class BoxGridBlock(StructBlock):
 
     class Meta:
         template = "blocks/box_grid.html"
-        icon = "placeholder"
+        icon = "radio-full"
         label = "Box Grid"
         preview_value = {
             "layout": "grid-cols-1",
@@ -399,6 +418,7 @@ class ColumnBlock(StructBlock):
             ("box", BoxBlock()),
             ("box_grid", BoxGridBlock()),
             ("project_card", ProjectCardBlock()),
+            ("experience_card", ExperienceCardBlock()),
         ],
         required=True,
     )
