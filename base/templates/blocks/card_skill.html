@@ -3,11 +3,11 @@
 <div class="group relative card-skill-block *:[a]:relative *:[a]:flex *:[a]:flex-col *:[a]:gap-6 *:[a]:h-full *:[a]:pt-10 *:[a]:px-5 *:[a]:pb-5.5 *:[a]:z-10 rounded-[10px] {{ self.background }} {% if self.background == 'bg-portfolio-orange' %}text-white{% endif %} {% if self.background == 'bg-portfolio-green' %}text-black{% endif %} overflow-hidden w-full">
     {% with link=self.link %}
         {% if link.link_type == 'internal' and link.page_link %}
-            <a href="{% pageurl link.page_link %}" title="{{ self.title }}">
+            <a href="{% pageurl link.page_link %}" title="{{ link.link_text }}">
         {% elif link.link_type == 'external' and link.url %}
-            <a href="{{ link.url }}" title="{{ self.title }}" target="_blank" rel="noopener noreferrer">
+            <a href="{{ link.url }}" title="{{ link.link_text }}" target="_blank" rel="noopener noreferrer">
         {% elif link.link_type == 'mailto' and link.mailto %}
-            <a href="mailto:{{ link.mailto }}" title="{{ self.title }}" target="_blank" rel="noopener noreferrer">
+            <a href="mailto:{{ link.mailto }}" title="{{ link.link_text }}" target="_blank" rel="noopener noreferrer">
         {% endif %}
 
         <div class="*:[svg]:size-9.5">
@@ -18,7 +18,7 @@
             <h3 class="font-poppins font-medium text-[1.5rem]/[1.1] uppercase">{{ self.title }}</h3>
 
             <div class="flex justify-center self-end items-center size-8 *:[svg]:w-4 border rounded-[6px] {% if self.background == 'bg-portfolio-orange' %}group-hover:bg-white group-hover:text-portfolio-orange{% endif %} group-hover:bg-black group-hover:text-portfolio-green {% if self.background == 'bg-portfolio-green' %}text-black{% endif %} transition-colors duration-300 ease-in-out">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m600-200-57-56 184-184H80v-80h647L544-704l56-56 280 280-280 280Z"/></svg>
+                {% include "blocks/includes/icons.html" with icon="arrow-right" %}
             </div>
         </div>
 

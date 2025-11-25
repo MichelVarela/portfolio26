@@ -66,6 +66,20 @@ class ProfileCardBlock(StructBlock):
         preview_template = "blocks/previews/profile_card.html"
 
 
+class ProjectCardBlock(StructBlock):
+    image = ImageChooserBlock(required=True)
+    heading = CharBlock(required=True)
+    subheading = CharBlock(required=True)
+    link = LinkBlock(required=True)
+    
+    class Meta:
+        template = "blocks/project_card.html"
+        icon = "user"
+        label = "Project Card"
+        preview_value = {"image": "https://via.placeholder.com/150", "heading": "John Doe"}
+        preview_template = "blocks/previews/project_card.html"
+
+
 class InformativeNumber(StructBlock):
     number = CharBlock(required=True)
     title = CharBlock(required=True)
@@ -384,6 +398,7 @@ class ColumnBlock(StructBlock):
             ("informative_number", InformativeNumber()),
             ("box", BoxBlock()),
             ("box_grid", BoxGridBlock()),
+            ("project_card", ProjectCardBlock()),
         ],
         required=True,
     )
