@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags %}
+
+{% block body_class %}template-formlandingpage{% endblock %}
+
+{% block extra_css %}
+{% endblock extra_css %}
+
+{% block content %}
+
+{{page.thank_you_heading}}
+{{page.thank_you_text}}
+
+{% endblock content %}

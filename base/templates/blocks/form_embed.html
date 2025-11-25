@@ -1,0 +1,33 @@
+{% load wagtailcore_tags %}
+
+{% if self.form_page %}
+    {% with form_page=self.form_page.specific %}
+        <div class="form-block bg-white">
+            <form action="{% pageurl form_page %}" method="POST">
+                {% csrf_token %}
+                
+                {% for field in form_page.get_form.visible_fields %}
+                    <div class="form-field {% if field.errors %}error{% endif %}">
+                        <label for="{{ field.id_for_label }}">
+                            {{ field.label }}
+                            {% if field.field.required %}<span class="required">*</span>{% endif %}
+                        </label>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <p class="help-text">{{ field.help_text }}</p>
+                        {% endif %}
+                        {% if field.errors %}
+                            <ul class="errors">
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    {% endwith %}
+{% endif %}

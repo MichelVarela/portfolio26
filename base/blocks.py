@@ -42,6 +42,18 @@ class LinkBlock(StructBlock):
         form_attrs = {'data-controller': 'conditional-link'}
 
 
+class FormEmbedBlock(StructBlock):
+    form_page = PageChooserBlock(required=True, page_type="basic.FormPage")
+    
+    class Meta:
+        template = "blocks/form_embed.html"
+        icon = "form"
+        label = "Form Embed"
+        preview_value = {"form_page": "https://www.google.com"}
+        preview_template = "blocks/previews/form_embed.html"
+        form_classname = 'form-embed-block struct-block'
+    
+
 class ProfileCardBlock(StructBlock):
     image = ImageChooserBlock(required=True)
     name = CharBlock(required=True)
@@ -454,6 +466,7 @@ class ColumnBlock(StructBlock):
             ("experience_card", ExperienceCardBlock()),
             ("tool_card", ToolCardBlock()),
             ("article_card", ArticleCardBlock()),
+            ("form_embed", FormEmbedBlock()),
         ],
         required=True,
     )
