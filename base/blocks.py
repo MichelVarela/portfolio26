@@ -99,6 +99,37 @@ class ExperienceCardBlock(StructBlock):
         preview_template = "blocks/previews/experience_card.html"
 
 
+class ArticleCardBlock(StructBlock):
+    heading = CharBlock(required=True)
+    paragraph = RichTextBlock(required=True)
+    link = LinkBlock(required=True)
+    date = DateBlock(required=True, validators=[NoFutureDateValidator()])
+    reading_time = CharBlock(required=True)
+    
+    class Meta:
+        template = "blocks/article_card.html"
+        icon = "draft"
+        label = "Article Card"
+        preview_value = {"heading": "John Doe", "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec metus vel ante convallis finibus. Nullam nec metus vel ante convallis finibus. Nullam nec metus vel ante convallis finibus.", "link": {"link_type": "internal", "page_link": "https://www.google.com", "url": "https://www.google.com", "mailto": "https://www.google.com", "link_text": "John Doe"}, "date": "2022-01-01", "reading_time": "10 min"}
+        preview_template = "blocks/previews/article_card.html"
+        form_classname = 'article-card-block struct-block'
+
+
+class ToolCardBlock(StructBlock):
+    image = ImageChooserBlock(required=True)
+    heading = CharBlock(required=True)
+    subheading = CharBlock(required=True)
+    link = LinkBlock(required=True)    
+    
+    class Meta:
+        template = "blocks/tool_card.html"
+        icon = "pick"
+        label = "Tool Card"
+        preview_value = {"image": "https://via.placeholder.com/150", "heading": "John Doe", "subheading": "John Doe", "link": {"link_type": "internal", "page_link": "https://www.google.com", "url": "https://www.google.com", "mailto": "https://www.google.com", "link_text": "John Doe"}}
+        preview_template = "blocks/previews/tool_card.html"
+        form_classname = 'tool-card-block struct-block'
+
+
 class InformativeNumber(StructBlock):
     number = CharBlock(required=True)
     title = CharBlock(required=True)
@@ -336,6 +367,7 @@ class BoxBlock(StructBlock):
         [
             ("informative_number", InformativeNumber()),
             ("card_skill", CardSkillBlock()),
+            ("tool_card", ToolCardBlock()),
         ]
     )
 
@@ -377,6 +409,7 @@ class BoxGridBlock(StructBlock):
         [
             ("informative_number", InformativeNumber()),
             ("card_skill", CardSkillBlock()),
+            ("tool_card", ToolCardBlock()),
         ]
     )
 
@@ -419,6 +452,8 @@ class ColumnBlock(StructBlock):
             ("box_grid", BoxGridBlock()),
             ("project_card", ProjectCardBlock()),
             ("experience_card", ExperienceCardBlock()),
+            ("tool_card", ToolCardBlock()),
+            ("article_card", ArticleCardBlock()),
         ],
         required=True,
     )
