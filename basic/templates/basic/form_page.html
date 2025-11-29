@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags form_tags %}
 
 {% block body_class %}template-formpage{% endblock %}
 
@@ -8,11 +8,20 @@
 
 {% block content %}
 
-<div class="**:[input]:bg-white **:[select]:bg-white **:[textarea]:bg-white">
+<div class="form-block p-6">
     <form action="{% pageurl page %}" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit">
+        {% csrf_token %}
+        {% for field in page.form_fields.all %}
+        {% with form_field=form|get_form_field:field.clean_name %}
+        <div class="form-field {{ field.field_width }}">
+            {{ form_field.label_tag }}
+            <div class="helptext">{{ form_field.help_text }}</div>
+            {{ form_field }}
+            {{ form_field.errors }}
+        </div>
+        {% endwith %}
+        {% endfor %}
+        <button type="submit">Submit</button>
     </form>
 </div>
 

@@ -1,33 +1,26 @@
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags form_tags %}
 
 {% if self.form_page %}
-    {% with form_page=self.form_page.specific %}
-        <div class="form-block bg-white">
-            <form action="{% pageurl form_page %}" method="POST">
-                {% csrf_token %}
-                
-                {% for field in form_page.get_form.visible_fields %}
-                    <div class="form-field {% if field.errors %}error{% endif %}">
-                        <label for="{{ field.id_for_label }}">
-                            {{ field.label }}
-                            {% if field.field.required %}<span class="required">*</span>{% endif %}
-                        </label>
-                        {{ field }}
-                        {% if field.help_text %}
-                            <p class="help-text">{{ field.help_text }}</p>
-                        {% endif %}
-                        {% if field.errors %}
-                            <ul class="errors">
-                                {% for error in field.errors %}
-                                    <li>{{ error }}</li>
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-                
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+{% with form_page=self.form_page.specific %}
+{% with form=form_page.get_form %}
+<div class="form-block">
+    <form action="{% pageurl form_page %}" method="POST">
+        {% csrf_token %}
+
+        {% for field in form_page.form_fields.all %}
+        {% with form_field=form|get_form_field:field.clean_name %}
+        <div class="form-field {{ field.field_width }}">
+            {{ form_field.label_tag }}
+            <div class="helptext">{{ form_field.help_text }}</div>
+            {{ form_field }}
+            {{ form_field.errors }}
         </div>
-    {% endwith %}
+        {% endwith %}
+        {% endfor %}
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+{% endwith %}
+{% endwith %}
 {% endif %}

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags %}
+{% load wagtailcore_tags %}
 
 {% block body_class %}template-formlandingpage{% endblock %}
 
@@ -8,7 +8,14 @@
 
 {% block content %}
 
-{{page.thank_you_heading}}
-{{page.thank_you_text}}
+<section class="wrapper py-6 text-center">
+    <h2 class="mb-6 font-poppins font-semibold text-[clamp(1.125rem,_1.025rem_+_0.5vw,_1.625rem)]/[1.2] text-white">
+        {{page.thank_you_heading}}
+    </h2>
+    <div class="mb-15 font-poppins text-[clamp(1rem,_0.9512rem_+_0.2439vw,_1.125rem)]/[1.4] font-normal text-light-gray">
+        {{page.thank_you_text|richtext}}
+    </div>
+    <a href="/" title="Volver al Inicio" class="flex items-center justify-center w-fit h-12 mx-auto font-poppins font-medium text-[.875rem]/[1.2] bg-portfolio-orange text-white px-5 rounded-[8px] hover:bg-portfolio-orange/90 transition-colors duration-300">Volver al Inicio</a>
+</section>
 
 {% endblock content %}

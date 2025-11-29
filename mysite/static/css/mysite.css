@@ -17,6 +17,8 @@
     --color-tinted-black: oklch(0.252 0 0); /* #222222 */
     --color-almost-black: oklch(0.1776 0 0); /* #111111 */
 
+    --color-silver-tint: oklch(0.7743 0.0128 296.28 / 20%); /* #b6b4bd33 */
+
     --color-portfolio-black: oklch(0.1887 0.0038 48.51); /* #151312 */
     --color-portfolio-orange: oklch(0.6899 0.1798 40.16); /* #f46c38 */
     --color-portfolio-green: oklch(0.9281 0.2143 125.6); /* #c5ff41 */
@@ -44,8 +46,41 @@
     }
 }
 
+@layer base {
+    /* form */
+    label {
+        @apply font-poppins text-[.75rem]/[1.2] text-medium-gray;
+    }
+    input, select {
+        @apply h-12;
+    }
+    textarea {
+        @apply py-1 min-h-25 field-sizing-content resize-none;
+    }
+    input, select, textarea {
+        @apply px-2.5 bg-silver-tint border border-shaded-gray rounded-[8px] text-white focus:outline-0 focus:border-portfolio-orange transition-all duration-300 ease-in-out;
+    }
+}
+
 @layer components {
     .wrapper {
         @apply w-full max-w-[clamp(24.375rem,_90%,_71.25rem)] mx-auto px-6 lg:px-0;
+    }
+    /* form */
+    .form-block {
+        form {
+            @apply grid grid-cols-1 md:grid-cols-2 gap-5;
+
+            .form-field {
+                @apply flex flex-col gap-2.5 justify-end;
+
+                .helptext {
+                    @apply font-poppins text-[.75rem]/[1.2] text-white;
+                }
+            }
+            button[type="submit"] {
+                @apply col-span-full cursor-pointer h-12 font-poppins font-medium text-[.875rem]/[1.2] bg-portfolio-orange text-white px-5 rounded-[8px] hover:bg-portfolio-orange/90 transition-colors duration-300;
+            }
+        }
     }
 }

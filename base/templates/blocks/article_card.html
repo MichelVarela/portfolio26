@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="flex justify-between font-poppins font-normal text-[1rem]/[1.4] text-light-gray">
-                    <span>{{ self.date|date:"F Y" }}</span> — {{ self.reading_time }}
+                    <span>{{ self.date|date:"F Y" }}</span> {{ self.reading_time }}
                 </div>
             </div>
             {% include "blocks/includes/icons.html" with icon="arrow-right" %} 
