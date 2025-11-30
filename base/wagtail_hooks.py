@@ -5,7 +5,7 @@ from django.forms.widgets import Select
 from wagtail import hooks
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.views.snippets import SnippetViewSet
-from wagtail.admin.panels import FieldPanel, FieldRowPanel, PublishingPanel 
+from wagtail.admin.panels import FieldPanel, PublishingPanel 
 
 from base.models import Menu
 
@@ -25,17 +25,16 @@ def editor_js():
 
 class MenuViewSet(SnippetViewSet):
     model = Menu
+    
 
     panels = [
-        FieldRowPanel([
-            FieldPanel("label", icon="title"),
-            FieldPanel("icon", icon="pick"),
-        ]),
+        FieldPanel("name"),
+        FieldPanel("icon", icon="pick"),
         FieldPanel("link_type", icon="link", widget=Select(attrs={'data-controller': 'conditional-snippet-link'})),
-        FieldPanel("page_link", icon="link"),
-        FieldPanel("url", icon="link"),
-        FieldPanel("mailto", icon="link"),
-        FieldPanel("link_text", icon="link"),
+        FieldPanel("page_link", icon="doc-empty"),
+        FieldPanel("url", icon="link-external"),
+        FieldPanel("mailto", icon="mail"),
+        FieldPanel("link_text", icon="title"),
         PublishingPanel(),
     ]
 

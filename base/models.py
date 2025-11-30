@@ -5,7 +5,7 @@ from wagtail.search import index
 
 
 class Menu(WorkflowMixin, DraftStateMixin, LockableMixin, RevisionMixin, index.Indexed, PreviewableMixin, models.Model):
-    label = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
     icon = models.CharField(
         max_length=15,
         choices=[
@@ -42,8 +42,8 @@ class Menu(WorkflowMixin, DraftStateMixin, LockableMixin, RevisionMixin, index.I
     )
 
     search_fields = [
-        index.SearchField('label'),
-        index.AutocompleteField('label'),
+        index.SearchField('name'),
+        index.AutocompleteField('name'),
     ]
 
     @property
@@ -54,7 +54,7 @@ class Menu(WorkflowMixin, DraftStateMixin, LockableMixin, RevisionMixin, index.I
         return "tags/previews/menu.html"
 
     def __str__(self):
-        return self.label
+        return self.name
     
     class Meta:
         verbose_name = "Menu Item"
