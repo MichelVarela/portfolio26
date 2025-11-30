@@ -60,6 +60,9 @@
     input, select, textarea {
         @apply px-2.5 bg-silver-tint border border-shaded-gray rounded-[8px] text-white focus:outline-0 focus:border-portfolio-orange transition-all duration-300 ease-in-out;
     }
+    option {
+        @apply text-medium-gray;
+    }
 }
 
 @layer components {

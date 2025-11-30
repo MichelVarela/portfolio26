@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailuserbar %}
+{% load static wagtailcore_tags wagtailuserbar menu_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +37,11 @@
     <body class="{% block body_class %}{% endblock %} bg-portfolio-black">
         {% wagtailuserbar %}
 
-        {% block content %}{% endblock %}
+        {% menu %}
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/mysite.js' %}"></script>

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header class="fixed top-7.5 left-0 flex items-center w-full z-50">
+    <nav class="flex gap-6 w-fit p-5 mx-auto rounded-[16px] bg-tinted-black shadow-2xl">
+        <div class="relative *:[a]:flex *:[a]:items-center *:[a]:justify-center *:[a]:size-9 group border rounded-[8px] border-dotted border-dark-white">
+            {% if object.link_type == 'internal' %}
+                <a href="{{ object.page_link.get_url }}" title="{{ object.link_text }}">
+            {% elif object.link_type == 'external' %}
+                <a href="{{ object.url }}" title="{{ object.link_text }}" target="_blank" rel="noopener noreferrer">
+            {% elif object.link_type == 'mailto' %}
+                <a href="mailto:{{ object.mailto }}" title="{{ object.link_text }}" target="_blank" rel="noopener noreferrer">
+            {% endif %}
+
+                <div class="*:[svg]:size-6 text-white">
+                    {% include "blocks/includes/menu_icons.html" with icon=object.icon %}
+                </div>
+                <div class="absolute bottom-0 left-1/2 -translate-x-1/2 py-1 px-2 rounded-[4px] bg-tinted-black opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:-bottom-12 transition-all duration-750 ease-in-out">
+                    <p class="font-poppins font-normal text-[.875rem]/[1.2] text-white">{{ object.label }}</p>
+                </div>
+            </a>
+        </div>
+    </nav>
+</header>
+{% endblock %}
