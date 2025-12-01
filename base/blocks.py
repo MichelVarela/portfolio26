@@ -11,6 +11,7 @@ from wagtail.blocks import (
     BooleanBlock,
 )
 from wagtail.images.blocks import ImageChooserBlock
+from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 from django.core.validators import EmailValidator
 from wagtail.fields import NoFutureDateValidator
@@ -23,6 +24,10 @@ class LinkBlock(StructBlock):
             ("internal", "Internal"),
             ("external", "External"),
             ("mailto", "Mailto"),
+            ("phone", "Phone"),
+            ("image", "Image"),
+            ("document", "Document"),
+            ("anchor", "Anchor"),
         ],
         default="internal",
         required=True,
@@ -30,13 +35,17 @@ class LinkBlock(StructBlock):
     page_link = PageChooserBlock(required=False)
     url = URLBlock(required=False)
     mailto = CharBlock(validators=[EmailValidator()], required=False)
+    phone = CharBlock(required=False)
+    image = ImageChooserBlock(required=False)
+    document = DocumentChooserBlock(required=False)
+    anchor = CharBlock(required=False)
     link_text = CharBlock(required=True)
     
     class Meta:
         template = "blocks/link.html"
         icon = "link"
         label = "Link"
-        preview_value = {"link_type": "internal", "page_link": "https://www.google.com", "url": "https://www.google.com", "mailto": "https://www.google.com", "link_text": "John Doe"}
+        preview_value = {"link_type": "internal", "page_link": "https://www.google.com", "url": "https://www.google.com", "mailto": "https://www.google.com", "phone": "https://www.google.com", "asset": "https://www.google.com", "anchor": "https://www.google.com", "link_text": "John Doe"}
         preview_template = "blocks/previews/link.html"
         form_classname = 'link-block struct-block'
         form_attrs = {'data-controller': 'conditional-link'}
@@ -298,19 +307,8 @@ class SpacerBlock(StructBlock):
         preview_template = "blocks/previews/spacer.html"
 
 
-class ButtonBlock(StructBlock):
-    link = LinkBlock(required=False)
-
-    class Meta:
-        template = "blocks/button.html"
-        icon = "placeholder"
-        label = "Button"
-        preview_value = {"link": {"link_type": "external", "url": "https://example.com"}}
-        preview_template = "blocks/previews/button.html"
-
-
 class ButtonAreaBlock(StructBlock):
-    buttons = ListBlock(ButtonBlock())
+    buttons = ListBlock(LinkBlock())
     direction = ChoiceBlock(
         choices=[
             ("horizontal", "Horizontal"),

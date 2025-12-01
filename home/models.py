@@ -18,3 +18,5 @@ class HomePage(Page):
         FieldPanel("body"),
     ]
 
+    subpage_types = ["basic.BasicPage", "basic.FormPage"]
+

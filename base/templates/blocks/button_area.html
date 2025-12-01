@@ -1,5 +1,5 @@
 {% load wagtailcore_tags %}
-<div class="button-area-block direction-{{ self.direction }} {{ self.gap }}">
+<div class="button-area-block flex flex-wrap {{ self.direction }} {{ self.gap }} *:block *:w-fit *:font-poppins *:font-medium *:text-[.875rem]/[1.2] *:bg-portfolio-orange *:text-white *:py-3 *:px-5 *:rounded-[8px] *:hover:bg-portfolio-orange/90 *:transition-colors *:duration-300">
     {% for block in self.buttons %}
     {% include_block block %}
     {% endfor %}

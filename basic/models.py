@@ -22,6 +22,8 @@ class BasicPage(Page):
         FieldPanel("body"),
     ]
 
+    subpage_types = ["basic.BasicPage", "basic.FormPage"]
+
 
 class FormField(AbstractFormField):
     page = ParentalKey('FormPage', on_delete=models.CASCADE, related_name='form_fields')
@@ -69,3 +71,5 @@ class FormPage(AbstractEmailForm):
         ObjectList(email_panels, heading='Email'),
         ObjectList(AbstractEmailForm.promote_panels, heading='Promote'),
     ])
+
+    subpage_types = []

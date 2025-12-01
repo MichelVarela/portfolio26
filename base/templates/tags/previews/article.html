@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load wagtailimages_tags wagtailcore_tags %}
+
+{% block content %}
+<section class="wrapper pt-40 lg:pt-50">
+    <div class="flex flex-col gap-4 mb-15 lg:mb-25">
+        <div class="**:w-full **:object-cover rounded-[16px] overflow-hidden">
+            {% picture object.image format-{avif,webp,jpeg} width-750 %}
+        </div>
+        <div class="flex justify-between font-poppins font-normal text-[1rem]/[1.4] text-light-gray">
+            <span>{{ object.date|date:"F Y" }}</span>
+            <span>{{ object.reading_time }}</span>
+        </div>
+        <h1 class="font-poppins font-bold text-[clamp(2.25rem,_2rem_+_1.25vw,_3.125rem)]/[1.2] text-white">{{object.name}}</h1>
+    </div>
+    <div class="paragraph-block">
+        {{object.paragraphs|richtext}}
+    </div>
+    <p>{{ object.link_text }}</p>
+</section>
+{% endblock %}

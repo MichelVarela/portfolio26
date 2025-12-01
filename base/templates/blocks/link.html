@@ -1,4 +1,4 @@
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% if self.link_type == 'internal' %}
     <a href="{% pageurl self.page_link %}" title="{{ self.link_text }}">
@@ -20,6 +20,43 @@
 {% endif %}
 {% if self.link_type == 'mailto' %}
     <a href="mailto:{{ self.mailto }}" title="{{ self.link_text }}" target="_blank" rel="noopener noreferrer">
+        {% if icon_template %}
+            {% include icon_template with icon=icon %}
+        {% else %}
+            {{ self.link_text }}
+        {% endif %}
+    </a>
+{% endif %}
+{% if self.link_type == 'phone' %}
+    <a href="tel:{{ self.phone }}" title="{{ self.link_text }}" target="_blank" rel="noopener noreferrer">
+        {% if icon_template %}
+            {% include icon_template with icon=icon %}
+        {% else %}
+            {{ self.link_text }}
+        {% endif %}
+    </a>
+{% endif %}
+{% if self.link_type == 'image' %}
+    {% image self.image original as image %}
+    <a href="{{ image.url }}" title="{{ self.link_text }}" target="_blank" rel="noopener noreferrer">
+        {% if icon_template %}
+            {% include icon_template with icon=icon %}
+        {% else %}
+            {{ self.link_text }}
+        {% endif %}
+    </a>
+{% endif %}
+{% if self.link_type == 'document' %}
+    <a href="{{ self.document.url }}" title="{{ self.link_text }}" target="_blank" rel="noopener noreferrer">
+        {% if icon_template %}
+            {% include icon_template with icon=icon %}
+        {% else %}
+            {{ self.link_text }}
+        {% endif %}
+    </a>
+{% endif %}
+{% if self.link_type == 'anchor' %}
+    <a href="#{{ self.anchor }}" title="{{ self.link_text }}">
         {% if icon_template %}
             {% include icon_template with icon=icon %}
         {% else %}

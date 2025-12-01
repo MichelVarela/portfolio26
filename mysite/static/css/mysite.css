@@ -69,6 +69,47 @@
     .wrapper {
         @apply w-full max-w-[clamp(24.375rem,_90%,_71.25rem)] mx-auto px-6 lg:px-0;
     }
+    /* paragraph */
+    .paragraph-block {
+        h2, h3, h4, h5, h6 {
+            @apply font-poppins font-bold text-[clamp(1.5rem,_1.25rem_+_1.25vw,2.375rem)]/[1.2] text-white;
+        }
+        p {
+            @apply font-poppins text-[clamp(1rem,_0.9512rem_+_0.2439vw,_1.125rem)]/[1.4] font-normal text-light-gray;
+
+            a {
+                @apply text-portfolio-orange underline;
+            }
+        }
+        ul {
+            @apply list-disc list-inside;
+        }
+        ol {
+            @apply list-decimal list-inside;
+        }
+        li {
+            @apply mb-1.5 font-poppins text-[clamp(1rem,_0.9512rem_+_0.2439vw,_1.125rem)]/[1.4] text-light-gray;
+        }
+        .richtext-image {
+            @apply rounded-[16px];
+
+            &.full-width {
+                @apply w-full;
+            }
+            &.left {
+                @apply mr-auto;
+            }
+            &.right {
+                @apply ml-auto;
+            }
+        }
+        iframe {
+            @apply w-full h-full aspect-video;
+        }
+        hr {
+            @apply text-shaded-gray;
+        }
+    }
     /* form */
     .form-block {
         form {
