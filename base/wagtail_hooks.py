@@ -34,6 +34,10 @@ class MenuViewSet(SnippetViewSet):
         FieldPanel("page_link", icon="doc-empty"),
         FieldPanel("url", icon="link-external"),
         FieldPanel("mailto", icon="mail"),
+        FieldPanel("phone", icon="phone"),
+        FieldPanel("image", icon="image"),
+        FieldPanel("document", icon="doc-empty"),
+        FieldPanel("anchor", icon="link"),
         FieldPanel("link_text", icon="title"),
         PublishingPanel(),
     ]
@@ -44,12 +48,16 @@ class ArticleViewSet(SnippetViewSet):
 
     panels = [
         FieldPanel("name"),
-        FieldPanel("image", icon="image"),
+        FieldPanel("imagen", icon="image"),
         FieldPanel("paragraphs", icon="doc-empty"),
         FieldPanel("link_type", icon="link", widget=Select(attrs={'data-controller': 'conditional-snippet-link'})),
         FieldPanel("page_link", icon="doc-empty"),
         FieldPanel("url", icon="link-external"),
         FieldPanel("mailto", icon="mail"),
+        FieldPanel("phone", icon="phone"),
+        FieldPanel("image", icon="image"),
+        FieldPanel("document", icon="doc-empty"),
+        FieldPanel("anchor", icon="link"),
         FieldPanel("link_text", icon="title"),
         FieldPanel("date", icon="date"),
         FieldPanel("reading_time", icon="time"),

@@ -1,3 +1,5 @@
+{% load wagtailimages_tags %}
+
 <header class="fixed top-7.5 left-0 flex items-center w-full z-50">
     <nav class="flex gap-6 w-fit p-5 mx-auto rounded-[16px] bg-tinted-black shadow-2xl">
     {% for menu in menu %}
@@ -8,6 +10,15 @@
                 <a href="{{ menu.url }}" title="{{ menu.link_text }}" target="_blank" rel="noopener noreferrer">
             {% elif menu.link_type == 'mailto' %}
                 <a href="mailto:{{ menu.mailto }}" title="{{ menu.link_text }}" target="_blank" rel="noopener noreferrer">
+            {% elif menu.link_type == 'phone' %}
+                <a href="tel:{{ menu.phone }}" title="{{ menu.link_text }}" target="_blank" rel="noopener noreferrer">
+            {% elif menu.link_type == 'image' %}
+                {% image menu.image original as image %}
+                <a href="{{ image.url }}" title="{{ menu.link_text }}" target="_blank" rel="noopener noreferrer">
+            {% elif menu.link_type == 'document' %}
+                <a href="{{ menu.document.get_url }}" title="{{ menu.link_text }}" target="_blank" rel="noopener noreferrer">
+            {% elif menu.link_type == 'anchor' %}
+                <a href="#{{ menu.anchor }}" title="{{ menu.link_text }}" target="_blank" rel="noopener noreferrer">
             {% endif %}
 
                 <div class="*:[svg]:size-6 text-white">

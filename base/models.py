@@ -24,12 +24,20 @@ class Menu(WorkflowMixin, DraftStateMixin, LockableMixin, RevisionMixin, index.I
             ("internal", "Internal"),
             ("external", "External"),
             ("mailto", "Mailto"),
+            ("phone", "Phone"),
+            ("image", "Image"),
+            ("document", "Document"),
+            ("anchor", "Anchor"),
         ],
         default="internal",
     )
     page_link = models.ForeignKey('wagtailcore.Page', null=True, blank=True, on_delete=models.CASCADE, related_name="+",)
     url = models.URLField(null=True, blank=True)
     mailto = models.EmailField(null=True, blank=True)
+    phone = models.CharField(max_length=255, null=True, blank=True)
+    image = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    document = models.ForeignKey('wagtaildocs.Document', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    anchor = models.CharField(max_length=255, null=True, blank=True)
     link_text = models.CharField(max_length=255)
 
     # Generic relations
@@ -64,7 +72,7 @@ class Menu(WorkflowMixin, DraftStateMixin, LockableMixin, RevisionMixin, index.I
 
 class Article(WorkflowMixin, DraftStateMixin, LockableMixin, RevisionMixin, index.Indexed, PreviewableMixin, models.Model):
     name = models.CharField(max_length=255)
-    image = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    imagen = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     paragraphs = RichTextField(blank=True)
     link_type = models.CharField(
         max_length=10,
@@ -72,12 +80,20 @@ class Article(WorkflowMixin, DraftStateMixin, LockableMixin, RevisionMixin, inde
             ("internal", "Internal"),
             ("external", "External"),
             ("mailto", "Mailto"),
+            ("phone", "Phone"),
+            ("image", "Image"),
+            ("document", "Document"),
+            ("anchor", "Anchor"),
         ],
         default="internal",
     )
     page_link = models.ForeignKey('wagtailcore.Page', null=True, blank=True, on_delete=models.CASCADE, related_name="+",)
     url = models.URLField(null=True, blank=True)
     mailto = models.EmailField(null=True, blank=True)
+    phone = models.CharField(max_length=255, null=True, blank=True)
+    image = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    document = models.ForeignKey('wagtaildocs.Document', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    anchor = models.CharField(max_length=255, null=True, blank=True)
     link_text = models.CharField(max_length=255)
     date = models.DateField(null=True, blank=True, validators=[NoFutureDateValidator()])
     reading_time = models.CharField(max_length=255)

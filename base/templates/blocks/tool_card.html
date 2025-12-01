@@ -8,6 +8,15 @@
             <a href="{{ link.url }}" title="{{ link.link_text }}" target="_blank" rel="noopener noreferrer">
         {% elif link.link_type == 'mailto' and link.mailto %}
             <a href="mailto:{{ link.mailto }}" title="{{ link.link_text }}" target="_blank" rel="noopener noreferrer">
+        {% elif link.link_type == 'phone' and link.phone %}
+            <a href="tel:{{ link.phone }}" title="{{ link.link_text }}" target="_blank" rel="noopener noreferrer">
+        {% elif link.link_type == 'image' and link.image %}
+            {% image link.image original as image %}
+            <a href="{{ image.url }}" title="{{ link.link_text }}">
+        {% elif link.link_type == 'document' and link.document %}
+            <a href="{{ link.document.url }}" title="{{ link.link_text }}">
+        {% elif link.link_type == 'anchor' and link.anchor %}
+            <a href="#{{ link.anchor }}" title="{{ link.link_text }}">
         {% endif %}
 
         <div class="size-15 **:w-full **:h-full **:object-cover rounded-[8px] overflow-hidden">
