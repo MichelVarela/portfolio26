@@ -22,7 +22,7 @@ class BasicPage(Page):
         FieldPanel("body"),
     ]
 
-    subpage_types = ["basic.BasicPage", "basic.FormPage"]
+    subpage_types = ["basic.BasicPage", "basic.FormPage", "basic.ArticlePage"]
 
 
 class FormField(AbstractFormField):
@@ -71,5 +71,21 @@ class FormPage(AbstractEmailForm):
         ObjectList(email_panels, heading='Email'),
         ObjectList(AbstractEmailForm.promote_panels, heading='Promote'),
     ])
+
+    subpage_types = []
+
+
+class ArticlePage(Page):
+    article = models.ForeignKey(
+        'base.Article',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel("article"),
+    ]
 
     subpage_types = []

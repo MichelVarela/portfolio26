@@ -10,6 +10,7 @@ from wagtail.blocks import (
     DateBlock,
     BooleanBlock,
 )
+from wagtail.snippets.blocks import SnippetChooserBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
@@ -121,17 +122,13 @@ class ExperienceCardBlock(StructBlock):
 
 
 class ArticleCardBlock(StructBlock):
-    heading = CharBlock(required=True)
-    paragraph = RichTextBlock(required=True)
-    link = LinkBlock(required=True)
-    date = DateBlock(required=True, validators=[NoFutureDateValidator()])
-    reading_time = CharBlock(required=True)
+    article = SnippetChooserBlock(required=True, target_model="base.Article")
     
     class Meta:
         template = "blocks/article_card.html"
         icon = "draft"
         label = "Article Card"
-        preview_value = {"heading": "John Doe", "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec metus vel ante convallis finibus. Nullam nec metus vel ante convallis finibus. Nullam nec metus vel ante convallis finibus.", "link": {"link_type": "internal", "page_link": "https://www.google.com", "url": "https://www.google.com", "mailto": "https://www.google.com", "link_text": "John Doe"}, "date": "2022-01-01", "reading_time": "10 min"}
+        preview_value = {"article": "https://www.google.com"}
         preview_template = "blocks/previews/article_card.html"
         form_classname = 'article-card-block struct-block'
 

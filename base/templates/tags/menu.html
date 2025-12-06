@@ -8,17 +8,8 @@
                 <a href="{{ menu.page_link.get_url }}" title="{{ menu.link_text }}">
             {% elif menu.link_type == 'external' %}
                 <a href="{{ menu.url }}" title="{{ menu.link_text }}" target="_blank" rel="noopener noreferrer">
-            {% elif menu.link_type == 'mailto' %}
-                <a href="mailto:{{ menu.mailto }}" title="{{ menu.link_text }}" target="_blank" rel="noopener noreferrer">
-            {% elif menu.link_type == 'phone' %}
-                <a href="tel:{{ menu.phone }}" title="{{ menu.link_text }}" target="_blank" rel="noopener noreferrer">
-            {% elif menu.link_type == 'image' %}
-                {% image menu.image original as image %}
-                <a href="{{ image.url }}" title="{{ menu.link_text }}" target="_blank" rel="noopener noreferrer">
-            {% elif menu.link_type == 'document' %}
-                <a href="{{ menu.document.get_url }}" title="{{ menu.link_text }}" target="_blank" rel="noopener noreferrer">
             {% elif menu.link_type == 'anchor' %}
-                <a href="#{{ menu.anchor }}" title="{{ menu.link_text }}" target="_blank" rel="noopener noreferrer">
+                <a href="#{{ menu.anchor }}" title="{{ menu.link_text }}">
             {% endif %}
 
                 <div class="*:[svg]:size-6 text-white">

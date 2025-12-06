@@ -14,8 +14,7 @@
         <h1 class="font-poppins font-bold text-[clamp(2.25rem,_2rem_+_1.25vw,_3.125rem)]/[1.2] text-white">{{object.name}}</h1>
     </div>
     <div class="paragraph-block">
-        {{object.paragraphs|richtext}}
+        {{object.paragraph|richtext}}
     </div>
-    <p>{{ object.link_text }}</p>
 </section>
 {% endblock %}

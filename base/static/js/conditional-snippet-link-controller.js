@@ -39,38 +39,38 @@ class ConditionalSnippetLinkController extends window.StimulusModule.Controller 
         const linkType = selectElement.value;
         
         // Encontrar los campos
-        const pageField = document.querySelector('[data-contentpath="page_link"]').closest('.w-panel');
-        const urlField = document.querySelector('[data-contentpath="url"]').closest('.w-panel');
-        const mailtoField = document.querySelector('[data-contentpath="mailto"]').closest('.w-panel');
-        const phoneField = document.querySelector('[data-contentpath="phone"]').closest('.w-panel');
-        const imageField = document.querySelector('[data-contentpath="image"]').closest('.w-panel');
-        const documentField = document.querySelector('[data-contentpath="document"]').closest('.w-panel');
-        const anchorField = document.querySelector('[data-contentpath="anchor"]').closest('.w-panel');
+        const pageField = document.querySelector('[data-contentpath="page_link"]');
+        const urlField = document.querySelector('[data-contentpath="url"]');
+        const mailtoField = document.querySelector('[data-contentpath="mailto"]');
+        const phoneField = document.querySelector('[data-contentpath="phone"]');
+        const imageField = document.querySelector('[data-contentpath="image"]');
+        const documentField = document.querySelector('[data-contentpath="document"]');
+        const anchorField = document.querySelector('[data-contentpath="anchor"]');
 
         // Ocultar todos
-        if (pageField) pageField.style.display = 'none';
-        if (urlField) urlField.style.display = 'none';
-        if (mailtoField) mailtoField.style.display = 'none';
-        if (phoneField) phoneField.style.display = 'none';
-        if (imageField) imageField.style.display = 'none';
-        if (documentField) documentField.style.display = 'none';
-        if (anchorField) anchorField.style.display = 'none';
+        if (pageField) pageField.closest('.w-panel').style.display = 'none';
+        if (urlField) urlField.closest('.w-panel').style.display = 'none';
+        if (mailtoField) mailtoField.closest('.w-panel').style.display = 'none';
+        if (phoneField) phoneField.closest('.w-panel').style.display = 'none';
+        if (imageField) imageField.closest('.w-panel').style.display = 'none';
+        if (documentField) documentField.closest('.w-panel').style.display = 'none';
+        if (anchorField) anchorField.closest('.w-panel').style.display = 'none';
 
         // Mostrar el correspondiente
         if (linkType === 'internal' && pageField) {
-            pageField.style.display = 'block';
+            pageField.closest('.w-panel').style.display = 'block';
         } else if (linkType === 'external' && urlField) {
-            urlField.style.display = 'block';
+            urlField.closest('.w-panel').style.display = 'block';
         } else if (linkType === 'mailto' && mailtoField) {
-            mailtoField.style.display = 'block';
+            mailtoField.closest('.w-panel').style.display = 'block';
         } else if (linkType === 'phone' && phoneField) {
-            phoneField.style.display = 'block';
+            phoneField.closest('.w-panel').style.display = 'block';
         } else if (linkType === 'image' && imageField) {
-            imageField.style.display = 'block';
+            imageField.closest('.w-panel').style.display = 'block';
         } else if (linkType === 'document' && documentField) {
-            documentField.style.display = 'block';
+            documentField.closest('.w-panel').style.display = 'block';
         } else if (linkType === 'anchor' && anchorField) {
-            anchorField.style.display = 'block';
+            anchorField.closest('.w-panel').style.display = 'block';
         }
     }
 }
