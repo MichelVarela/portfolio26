@@ -10,10 +10,10 @@
 <section class="wrapper py-40 lg:py-50">
     <div class="flex flex-col gap-4 mb-15 lg:mb-25">
         <div class="**:w-full **:object-cover rounded-[16px] overflow-hidden">
-            {% picture page.article.imagen format-{avif,webp,jpeg} width-750 %}
+            {% picture page.article.hero format-{avif,webp,jpeg} width-750 %}
         </div>
         <div class="flex justify-between font-poppins font-normal text-[1rem]/[1.4] text-light-gray">
-            <span>{{ page.article.date|date:"F Y" }}</span>
+            <span>{{ page.article.date|date:"M j, Y" }}</span>
             <span>{{ page.article.reading_time }}</span>
         </div>
         <h1 class="font-poppins font-bold text-[clamp(2.25rem,_2rem_+_1.25vw,_3.125rem)]/[1.2] text-white">{{page.article.name}}</h1>

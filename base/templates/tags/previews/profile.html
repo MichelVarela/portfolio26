@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load wagtailimages_tags static wagtailcore_tags %}
+
+{% block content %}
+<div class="wrapper py-40 lg:py-50">
+    <div class="relative rounded-[16px] bg-white overflow-hidden">
+        <div class="relative flex flex-col gap-6 w-full max-w-86 py-7.5 px-5 mx-auto">
+            <div class="rounded-[16px] overflow-hidden">
+                {% picture object.image format-{avif,webp,jpeg} width-400 %}
+            </div>
+
+            <div class="flex flex-col gap-4 z-10">
+                <h2 class="font-poppins font-bold text-[2.125rem]/[1.1] leading-[1.2] text-center text-black">{{ object.name }}</h2>
+                <p class="font-poppins font-medium text-[1.125rem]/[1.1] text-center text-medium-gray">{{ object.about_me }}</p>
+                <ul class="flex justify-center gap-4 **:[svg]:size-5 **:[svg]:text-portfolio-orange">
+                    {% for block in object.social_links %}
+                    {% with link_data=block.value %}
+                    <li>
+                        {% if link_data.icon == "email" %}
+                        {% include "blocks/link.html" with self=link_data.link icon_template="blocks/includes/social_icons.html" icon="email" only %}
+                        {% endif %}
+                        {% if link_data.icon == "linkedin" %}
+                        {% include "blocks/link.html" with self=link_data.link icon_template="blocks/includes/social_icons.html" icon="linkedin" only %}
+                        {% endif %}
+                        {% if link_data.icon == "github" %}
+                        {% include "blocks/link.html" with self=link_data.link icon_template="blocks/includes/social_icons.html" icon="github" only %}
+                        {% endif %}
+                    </li>
+                    {% endwith %}
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="absolute -top-12.5 left-0 w-48.5 pointer-events-none z-0">
+                <img src="{% static 'images/framer-2.svg' %}" alt="framer-2">
+            </div>
+        </div>
+        <div class="absolute bottom-37.5 -left-43.75 w-67.5 pointer-events-none z-0">
+            <img src="{% static 'images/framer-1.svg' %}" alt="framer-1">
+        </div>
+    </div>
+</div>
+{% endblock %}

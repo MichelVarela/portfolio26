@@ -65,30 +65,15 @@ class FormEmbedBlock(StructBlock):
     
 
 class ProfileCardBlock(StructBlock):
-    image = ImageChooserBlock(required=True)
-    name = CharBlock(required=True)
-    about_me = CharBlock(required=True)
-    social_links = ListBlock(StructBlock(
-        [
-            ("icon", ChoiceBlock(
-                choices=[
-                    ("email", "Email"),
-                    ("linkedin", "LinkedIn"),
-                    ("github", "GitHub"),
-                ],
-                default="email",
-                required=True,
-            )),
-            ("link", LinkBlock(required=True)),
-        ]
-    ))
+    profile = SnippetChooserBlock(required=True, target_model="base.Profile")
     
     class Meta:
         template = "blocks/profile_card.html"
         icon = "user"
         label = "Profile Card"
-        preview_value = {"image": "https://via.placeholder.com/150", "name": "John Doe"}
+        preview_value = {"profile": "https://www.google.com"}
         preview_template = "blocks/previews/profile_card.html"
+        form_classname = 'profile-card-block struct-block'
 
 
 class ProjectCardBlock(StructBlock):
