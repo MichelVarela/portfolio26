@@ -91,18 +91,13 @@ class ProjectCardBlock(StructBlock):
 
 
 class ExperienceCardBlock(StructBlock):
-    heading = CharBlock(required=True)
-    paragraph = RichTextBlock(required=True)
-    link = LinkBlock(required=True)
-    from_date = DateBlock(required=True, validators=[NoFutureDateValidator()])
-    to_date = DateBlock(required=True, validators=[NoFutureDateValidator()])
-    current = BooleanBlock(required=False)
+    experience = SnippetChooserBlock(required=True, target_model="base.Experience")
     
     class Meta:
         template = "blocks/experience_card.html"
         icon = "folder-open-1"
         label = "Experience Card"
-        preview_value = {"heading": "John Doe", "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec metus vel ante convallis finibus. Nullam nec metus vel ante convallis finibus. Nullam nec metus vel ante convallis finibus.", "link": {"link_type": "internal", "page_link": "https://www.google.com", "url": "https://www.google.com", "mailto": "https://www.google.com", "link_text": "John Doe"}, "from_date": "2022-01-01", "to_date": "2022-01-01", "current": True}
+        preview_value = {"experience": "https://www.google.com"}
         preview_template = "blocks/previews/experience_card.html"
 
 

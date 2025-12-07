@@ -7,7 +7,7 @@ from wagtail.snippets.models import register_snippet
 from wagtail.snippets.views.snippets import SnippetViewSet
 from wagtail.admin.panels import FieldPanel, PublishingPanel, PageChooserPanel
 
-from base.models import Menu, Article, Profile
+from base.models import Menu, Article, Profile, Experience
 
 @hooks.register('insert_global_admin_css')
 def global_admin_css():
@@ -66,9 +66,26 @@ class ProfileViewSet(SnippetViewSet):
         PublishingPanel(),
     ]
 
-# Instead of using @register_snippet as a decorator on the model class,
-# register the snippet using register_snippet as a function and pass in
-# the custom SnippetViewSet subclass.
+
+class ExperienceViewSet(SnippetViewSet):
+    model = Experience
+
+    panels = [
+        FieldPanel("name"),
+        FieldPanel("company"),
+        FieldPanel("from_date", icon="date"),
+        FieldPanel("to_date", icon="date"),
+        FieldPanel("current", icon="pick"),
+        FieldPanel("link_type", icon="link", widget=Select(attrs={'data-controller': 'conditional-snippet-link'})),
+        FieldPanel("page_link", icon="doc-empty"),
+        FieldPanel("url", icon="link-external"),
+        FieldPanel("link_text", icon="title"),
+        FieldPanel("paragraph", icon="doc-empty"),
+        PublishingPanel(),
+    ]
+
+
 register_snippet(MenuViewSet)
 register_snippet(ArticleViewSet)
 register_snippet(ProfileViewSet)
+register_snippet(ExperienceViewSet)

@@ -1,31 +1,20 @@
 {% load wagtailimages_tags wagtailcore_tags %}
 
 <div class="py-4 px-2 lg:py-6 lg:px-4 rounded-[16px] *:[a]:flex *:[a]:gap-3 group hover:bg-white/5 transition-colors duration-300 ease-in-out">
-    {% with link=self.link %}
-        {% if link.link_type == 'internal' and link.page_link %}
-            <a href="{% pageurl link.page_link %}" title="{{ link.link_text }}">
-        {% elif link.link_type == 'external' and link.url %}
-            <a href="{{ link.url }}" title="{{ link.link_text }}" target="_blank" rel="noopener noreferrer">
-        {% elif link.link_type == 'mailto' and link.mailto %}
-            <a href="mailto:{{ link.mailto }}" title="{{ link.link_text }}" target="_blank" rel="noopener noreferrer">
-        {% elif link.link_type == 'phone' and link.phone %}
-            <a href="tel:{{ link.phone }}" title="{{ link.link_text }}" target="_blank" rel="noopener noreferrer">
-        {% elif link.link_type == 'image' and link.image %}
-            {% image link.image original as image %}
-            <a href="{{ image.url }}" title="{{ link.link_text }}">
-        {% elif link.link_type == 'document' and link.document %}
-            <a href="{{ link.document.url }}" title="{{ link.link_text }}">
-        {% elif link.link_type == 'anchor' and link.anchor %}
-            <a href="#{{ link.anchor }}" title="{{ link.link_text }}">
+    {% with experience=self.experience %}
+        {% if experience.link_type == 'internal' and experience.page_link %}
+            <a href="{% pageurl experience.page_link %}" title="{{ experience.link_text }}">
+        {% elif experience.link_type == 'external' and experience.url %}
+            <a href="{{ experience.url }}" title="{{ experience.link_text }}" target="_blank" rel="noopener noreferrer">
         {% endif %}
     
         <div class="flex-1 flex justify-between gap-3 *:[svg]:hidden lg:*:[svg]:block *:[svg]:min-w-5 *:[svg]:size-5 *:[svg]:text-portfolio-orange *:[svg]:-rotate-45 group-hover:*:[svg]:translate-x-2.5 group-hover:*:[svg]:-translate-y-2.5 *:[svg]:transition-transform *:[svg]:duration-600 *:[svg]:ease-in-out">
-            <div class="flex flex-col gap-3.5 justify-center lg:max-w-105">
-                <h3 class="font-poppins font-semibold text-[clamp(1.125rem,_1.025rem_+_0.5vw,_1.625rem)]/[1.2] text-white">{{ self.heading }}</h3>
-                <div class="mb-1.5 font-poppins font-normal text-[1rem]/[1.4] text-light-gray">{{ self.paragraph }}</div>
+            <div class="flex flex-col gap-3.5 justify-center lg:max-w-8/10">
+                <h3 class="font-poppins font-semibold text-[clamp(1.125rem,_1.025rem_+_0.5vw,_1.625rem)]/[1.2] text-white">{{ experience.name }}</h3>
+                <div class="mb-1.5 font-poppins font-normal text-[1rem]/[1.4] text-light-gray">{{ experience.paragraph }}</div>
 
                 <div class="font-poppins font-normal text-[1rem]/[1.4] text-light-gray">
-                    <span>{{ self.from_date|date:"F Y" }}</span> — {% if self.current %}Present{% else %}{{ self.to_date|date:"F Y" }}{% endif %}
+                    <span>{{ experience.from_date|date:"F Y" }}</span> — {% if experience.current %}Present{% else %}{{ experience.to_date|date:"F Y" }}{% endif %}
                 </div>
             </div>
             {% include "blocks/includes/icons.html" with icon="arrow-right" %} 
